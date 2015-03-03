@@ -4,6 +4,7 @@ EasingClasses =
   sway: require "../easing/sway"
   hardbounce: require "../easing/hardbounce"
   hardsway: require "../easing/hardsway"
+  easeinsine: require "../easing/easeinsine"
 
 class Component
   easing: "bounce"
