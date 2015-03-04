@@ -1,6 +1,6 @@
 Easing = require "./index"
 
-class BounceEasing extends Easing
+class InSineEasing extends Easing
 
   constructor: (options = {}) ->
     super
@@ -15,4 +15,4 @@ class BounceEasing extends Easing
 
     (@a2 + @om2a * ratio + @a2 - 2 * @a * Math.sqrt(@a2 + @om2a * ratio)) / @om2a2
 
-module.exports = BounceEasing
+module.exports = InSineEasing
