@@ -1,4 +1,5 @@
 Matrix4D = require "./math/matrix4d"
+Hash = require "object-hash"
 
 ComponentClasses =
   scale: require "./components/scale"
@@ -9,6 +10,7 @@ ComponentClasses =
 class Bounce
   @FPS: 30
   @counter: 1
+  @cache: {}
 
   components: null
   duration: 0
@@ -50,11 +52,16 @@ class Bounce
       .reduce (a, b) -> Math.max a, b
 
   define: (name) ->
-    @name = name or Bounce.generateName()
-    @styleElement = document.createElement "style"
-    @styleElement.innerHTML = @getKeyframeCSS name: @name, prefix: true
+    temp = Hash.MD5(@serialize())
+    if Bounce.cache[temp]
+      @name = Bounce.cache[temp]
+    else
+      @name = name or Bounce.generateName()
+      Bounce.cache[temp] = @name
+      @styleElement = document.createElement "style"
+      @styleElement.innerHTML = @getKeyframeCSS name: @name, prefix: true
 
-    document.body.appendChild @styleElement
+      document.body.appendChild @styleElement
     this
 
   applyTo: (elements, options = {}) ->
