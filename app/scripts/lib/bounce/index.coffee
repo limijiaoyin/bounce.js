@@ -1,5 +1,4 @@
 Matrix4D = require "./math/matrix4d"
-Hash = require "object-hash"
 
 ComponentClasses =
   scale: require "./components/scale"
@@ -52,7 +51,7 @@ class Bounce
       .reduce (a, b) -> Math.max a, b
 
   define: (name) ->
-    temp = Hash.MD5(@serialize())
+    temp = JSON.stringify(@serialize())
     if Bounce.cache[temp]
       @name = Bounce.cache[temp]
     else
