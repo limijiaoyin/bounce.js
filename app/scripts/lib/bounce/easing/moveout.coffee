@@ -1,5 +1,5 @@
 Easing = require "./index"
-t = require "timing-function";
+t = require "timing-function"
 
 class MoveOut extends Easing
 
