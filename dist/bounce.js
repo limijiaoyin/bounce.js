@@ -355,11 +355,13 @@ module.exports = BounceEasing;
 
 
 },{"./index":10}],7:[function(_dereq_,module,exports){
-var Easing, InSineEasing,
+var Easing, InSineEasing, t,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
 Easing = _dereq_("./index");
+
+t = _dereq_("timing-function");
 
 InSineEasing = (function(superClass) {
   extend(InSineEasing, superClass);
@@ -369,17 +371,15 @@ InSineEasing = (function(superClass) {
       options = {};
     }
     InSineEasing.__super__.constructor.apply(this, arguments);
-    this.a = 0.105263;
-    this.a2 = this.a * this.a;
-    this.om2a = 1 - 2 * this.a;
-    this.om2a2 = this.om2a * this.om2a;
   }
 
   InSineEasing.prototype.calculate = function(ratio) {
+    var func;
     if (ratio >= 1) {
       return 1;
     }
-    return (this.a2 + this.om2a * ratio + this.a2 - 2 * this.a * Math.sqrt(this.a2 + this.om2a * ratio)) / this.om2a2;
+    func = t.get(0.47, 0, 0.745, 0.715);
+    return func(ratio);
   };
 
   return InSineEasing;
@@ -390,7 +390,7 @@ module.exports = InSineEasing;
 
 
 
-},{"./index":10}],8:[function(_dereq_,module,exports){
+},{"./index":10,"timing-function":18}],8:[function(_dereq_,module,exports){
 var BounceEasing, HardBounceEasing,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
